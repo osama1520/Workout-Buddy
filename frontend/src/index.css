@@ -44,6 +44,9 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row; 
 }
 .workout-details h4 {
   margin: 0 0 10px 0;
@@ -55,7 +58,8 @@ header a {
   font-size: 0.9em;
   color: #555;
 }
-.workout-details span {
+
+.workout-details .but1 {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -64,6 +68,12 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
+}
+
+.div2 {
+  display: flex;
+  justify-content: space-around; 
+  width: 10%; 
 }
 /* new workout form */
 label, input {
@@ -86,6 +96,11 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+  display: block; 
+  margin: 10px auto 0;
+  width: fit-content; 
+  width: fit-content; /* Adjusts button width to its content */
+  font-size: 14px; 
 }
 div.error {
   padding: 10px;
@@ -95,7 +110,6 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
-
 input.error {
   border: 1px solid var(--error);
 }
