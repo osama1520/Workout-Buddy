@@ -1,8 +1,9 @@
 import { useState,useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useWorkoutsContext } from "../hooks/useWorkoutContext";
+import {useAuthContext} from '../hooks/useAuthContext'
+
 function UpdateModal({id}) {
   const [show, setShow] = useState(false);
 
@@ -15,9 +16,15 @@ function UpdateModal({id}) {
   const [reps,setReps] = useState('')
   const [error,setError] = useState(null)
   const [emptyFields,setEmptyFields] = useState([])
+  const {user} = useAuthContext()
 
   const update = async () => {
-    const response = await fetch('/api/workouts')
+    const response = await fetch('/api/workouts',{
+        headers:{
+            'Authorization': `Bearer ${user.token}`
+
+        }
+    })
     const json = await response.json()
     if (response.ok){
         dispatch({type:'UPDATE_WORKOUT',payload:json})
@@ -26,7 +33,12 @@ function UpdateModal({id}) {
     useEffect(() => {
         const fetchData = async () => {
         try {
-            const response = await fetch(`/api/workouts/${id}`);
+            const response = await fetch(`/api/workouts/${id}`,{
+                headers:{
+                    'Authorization': `Bearer ${user.token}`
+
+                }
+            });
             const data = await response.json();
             setTitle(data.title)
             setReps(data.reps)
@@ -36,20 +48,25 @@ function UpdateModal({id}) {
         }
         };
 
-        if (id) {
+        if (user) {
         fetchData();
         }
-    }, [id])
+    }, [id,user])
   const handleSubmit = async (e) => {
       e.preventDefault()
-
+      if (!user){
+        setError('You must be logged in')
+        return
+    }
       const workout = {title,load,reps}
 
       const response = await fetch('/api/workouts/'+id,{
           method:'PATCH',
           body: JSON.stringify(workout),
           headers:{
-              'Content-Type':'application/json'
+              'Content-Type':'application/json',
+              'Authorization': `Bearer ${user.token}`
+
           }
       })
 
