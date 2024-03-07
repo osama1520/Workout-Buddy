@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { useWorkoutsContext } from "../hooks/useWorkoutContext";
 import {useAuthContext} from '../hooks/useAuthContext'
-
+import { useLogout } from '../hooks/useLogout';
 // components
 
 import WorkoutDetails from '../components/WorkoutDetails'
 import WorkoutsForm from '../components/WorkoutsForm'
 const Home = ()=>{
-
+    const { logout } = useLogout();
     const {workouts,dispatch} = useWorkoutsContext()
     const {user} = useAuthContext()
 
@@ -22,6 +22,8 @@ const Home = ()=>{
             const json = await response.json()
             if (response.ok){
                 dispatch({type:'SET_WORKOUTS',payload:json})
+            }else{
+                logout();
             }
         }
         if (user){

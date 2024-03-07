@@ -9,7 +9,7 @@ export const useSignup = ()=>{
         setIsLoading(true)
         setError(null)
         // console.log(name+ ' IN USE SIGNUP')
-        const response = await fetch('/api/user/signup',{
+        const response = await fetch('http://osama123.duckdns.org:4000/api/user/signup',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({email,password,name})

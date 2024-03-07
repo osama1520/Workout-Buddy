@@ -19,7 +19,7 @@ function UpdateModal({id}) {
   const {user} = useAuthContext()
 
   const update = async () => {
-    const response = await fetch('/api/workouts',{
+    const response = await fetch('http://osama123.duckdns.org:4000/api/workouts',{
         headers:{
             'Authorization': `Bearer ${user.token}`
 
@@ -33,7 +33,7 @@ function UpdateModal({id}) {
     useEffect(() => {
         const fetchData = async () => {
         try {
-            const response = await fetch(`/api/workouts/${id}`,{
+            const response = await fetch(`http://osama123.duckdns.org:4000/api/workouts/${id}`,{
                 headers:{
                     'Authorization': `Bearer ${user.token}`
 
@@ -60,7 +60,7 @@ function UpdateModal({id}) {
     }
       const workout = {title,load,reps}
 
-      const response = await fetch('/api/workouts/'+id,{
+      const response = await fetch('http://osama123.duckdns.org:4000/api/workouts/'+id,{
           method:'PATCH',
           body: JSON.stringify(workout),
           headers:{

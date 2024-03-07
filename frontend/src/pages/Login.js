@@ -65,6 +65,7 @@ const Login = () =>{
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email}
                                 className="flip-card__input"
+                                placeholder='Email'
                                 />
                                 <input
                                 type="password"
