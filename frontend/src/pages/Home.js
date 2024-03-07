@@ -14,7 +14,7 @@ const Home = ()=>{
     useEffect(() => {
         
         const fetchWorkouts = async () => {
-            const response = await fetch('/api/workouts',{
+            const response = await fetch('http://osama123.duckdns.org:4000/api/workouts',{
                 headers:{
                     'Authorization': `Bearer ${user.token}`
                 }
